@@ -1,3 +1,5 @@
+import { Link, NavLink } from "react-router-dom";
+
 const Navbar = () => {
   return (
     <nav
@@ -5,9 +7,10 @@ const Navbar = () => {
       aria-label="Third navbar example"
     >
       <div className="container">
-        <a className="navbar-brand" href="#">
+        <Link to="/" className="navbar-brand">
           Real<i className="bi bi-geo-fill"></i>App
-        </a>
+        </Link>
+
         <button
           className="navbar-toggler"
           type="button"
@@ -23,9 +26,9 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarsExample03">
           <ul className="navbar-nav me-auto mb-2 mb-sm-0">
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <NavLink to="about" className="nav-link">
                 About
-              </a>
+              </NavLink>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">
