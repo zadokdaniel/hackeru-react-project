@@ -1,5 +1,6 @@
 import Joi from "joi";
 import { useFormik } from "formik";
+import { formikValidateUsingJoi } from "../utils/formikValidateUsingJoi";
 
 import Input from "./common/Input";
 import PageHeader from "./common/pageHeader";
@@ -12,29 +13,14 @@ const SignUp = () => {
       password: "",
       name: "",
     },
-    validate(values) {
-      const { error } = Joi.object({
-        email: Joi.string()
-          .email({ tlds: { allow: false } })
-          .required()
-          .label("Email"),
-        password: Joi.string().min(6).required().label("Password"),
-        name: Joi.string().min(2).required().label("Name"),
-      }).validate(values, {
-        abortEarly: false,
-      });
-
-      if (!error) {
-        return null;
-      }
-
-      const errors = {};
-      for (const detail of error.details) {
-        errors[detail.path[0]] = detail.message;
-      }
-
-      return errors;
-    },
+    validate: formikValidateUsingJoi({
+      email: Joi.string()
+        .email({ tlds: { allow: false } })
+        .required()
+        .label("Email"),
+      password: Joi.string().min(6).required().label("Password"),
+      name: Joi.string().min(2).required().label("Name"),
+    }),
     onSubmit(values) {
       console.log(values);
     },
