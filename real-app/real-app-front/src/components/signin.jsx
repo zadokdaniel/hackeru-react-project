@@ -1,17 +1,15 @@
-import Joi from "joi";
-import { useFormik } from "formik";
-import { formikValidateUsingJoi } from "../utils/formikValidateUsingJoi";
-
-import Input from "./common/Input";
-import PageHeader from "./common/pageHeader";
-import { createUser } from "../services/usersService";
-
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Joi from "joi";
+import PageHeader from "./common/pageHeader";
+import { useFormik } from "formik";
+import Input from "./common/Input";
+import formikValidateUsingJoi from "../utils/formikValidateUsingJoi";
+import { useNavigate } from "react-router-dom";
+import { loginUser } from "../services/usersService";
 
 import { toast } from "react-toastify";
 
-const SignUp = ({ redirect }) => {
+const SignIn = ({ redirect }) => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
 
@@ -20,7 +18,6 @@ const SignUp = ({ redirect }) => {
     initialValues: {
       email: "",
       password: "",
-      name: "",
     },
     validate: formikValidateUsingJoi({
       email: Joi.string()
@@ -28,13 +25,10 @@ const SignUp = ({ redirect }) => {
         .required()
         .label("Email"),
       password: Joi.string().min(6).required().label("Password"),
-      name: Joi.string().min(2).required().label("Name"),
     }),
     async onSubmit(values) {
       try {
-        await createUser({ ...values, biz: false });
-
-        toast("Your account is ready 👏");
+        await loginUser(values);
 
         if (redirect) {
           navigate(redirect);
@@ -50,11 +44,11 @@ const SignUp = ({ redirect }) => {
   return (
     <>
       <PageHeader
-        title="Sign Up with Real App"
-        description="Open a new account, it is free you yammani!!"
+        title="Sign In with Real App"
+        description="Sign in to your account"
       />
 
-      <form noValidate autoComplete="off" onSubmit={form.handleSubmit}>
+      <form noValidate onSubmit={form.handleSubmit}>
         {error && <div className="alert alert-danger">{error}</div>}
 
         <Input
@@ -69,20 +63,10 @@ const SignUp = ({ redirect }) => {
           error={form.touched.password && form.errors.password}
           {...form.getFieldProps("password")}
         />
-        <Input
-          type="text"
-          label="Name"
-          error={form.touched.name && form.errors.name}
-          {...form.getFieldProps("name")}
-          // onChange={form.handleChange}
-          // onBlur={form.handleBlur}
-          // value={form.values.name}
-          // name="name"
-        />
 
         <div className="my-2">
           <button disabled={!form.isValid} className="btn btn-primary">
-            Sign Up
+            Sign In
           </button>
         </div>
       </form>
@@ -90,4 +74,4 @@ const SignUp = ({ redirect }) => {
   );
 };
 
-export default SignUp;
+export default SignIn;
