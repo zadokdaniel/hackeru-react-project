@@ -34,9 +34,11 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
-                My Cards
-              </a>
+              {user?.biz && (
+                <NavLink to="my-cards" className="nav-link">
+                  My Cards
+                </NavLink>
+              )}
             </li>
           </ul>
 

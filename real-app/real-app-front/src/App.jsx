@@ -11,6 +11,9 @@ import SignIn from "./components/signin";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import SignOut from "./components/signout";
+import SignUpBiz from "./components/signupBiz";
+import MyCards from "./components/myCards";
+import CreateCard from "./components/createCard";
 
 function App() {
   return (
@@ -23,6 +26,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="about" element={<About />} />
+          <Route path="create-card" element={<CreateCard />} />
+          <Route path="my-cards" element={<MyCards />} />
+          <Route
+            path="signubiz"
+            element={<SignUpBiz redirect="/create-card" />}
+          />
           <Route path="signup" element={<SignUp redirect="/signin" />} />
           <Route path="signin" element={<SignIn redirect="/" />} />
           <Route path="signout" element={<SignOut redirect="/" />} />
