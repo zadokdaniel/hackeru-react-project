@@ -14,6 +14,7 @@ import SignOut from "./components/signout";
 import SignUpBiz from "./components/signupBiz";
 import MyCards from "./components/myCards";
 import CreateCard from "./components/createCard";
+import ProtectedRoute from "./components/common/protectedRoute";
 
 function App() {
   return (
@@ -26,8 +27,22 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="about" element={<About />} />
-          <Route path="create-card" element={<CreateCard />} />
-          <Route path="my-cards" element={<MyCards />} />
+          <Route
+            path="create-card"
+            element={
+              <ProtectedRoute bizOnly>
+                <CreateCard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="my-cards"
+            element={
+              <ProtectedRoute bizOnly>
+                <MyCards />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="signubiz"
             element={<SignUpBiz redirect="/create-card" />}

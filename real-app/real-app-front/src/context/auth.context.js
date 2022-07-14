@@ -5,7 +5,7 @@ export const authContext = React.createContext(null);
 authContext.displayName = "Auth";
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(usersService.getUser());
 
   const refreshUser = () => {
     setUser(usersService.getUser());
@@ -25,10 +25,6 @@ export const AuthProvider = ({ children }) => {
     usersService.logout();
     refreshUser();
   };
-
-  useEffect(() => {
-    refreshUser();
-  }, []);
 
   return (
     <authContext.Provider value={{ user, login, logout, createUser }}>
