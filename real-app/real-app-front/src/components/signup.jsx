@@ -4,15 +4,17 @@ import { formikValidateUsingJoi } from "../utils/formikValidateUsingJoi";
 
 import Input from "./common/Input";
 import PageHeader from "./common/pageHeader";
-import { createUser } from "../services/usersService";
 
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import { toast } from "react-toastify";
+import { useAuth } from "../context/auth.context";
 
 const SignUp = ({ redirect }) => {
   const navigate = useNavigate();
+  const { createUser } = useAuth();
+
   const [error, setError] = useState("");
 
   const form = useFormik({

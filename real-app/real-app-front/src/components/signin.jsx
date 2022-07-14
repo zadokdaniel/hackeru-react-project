@@ -5,12 +5,12 @@ import { useFormik } from "formik";
 import Input from "./common/Input";
 import formikValidateUsingJoi from "../utils/formikValidateUsingJoi";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../services/usersService";
-
-import { toast } from "react-toastify";
+import { useAuth } from "../context/auth.context";
 
 const SignIn = ({ redirect }) => {
   const navigate = useNavigate();
+  const { login } = useAuth();
+
   const [error, setError] = useState("");
 
   const form = useFormik({
@@ -28,7 +28,7 @@ const SignIn = ({ redirect }) => {
     }),
     async onSubmit(values) {
       try {
-        await loginUser(values);
+        await login(values);
 
         if (redirect) {
           navigate(redirect);
