@@ -5,7 +5,7 @@ import { formikValidateUsingJoi } from "../utils/formikValidateUsingJoi";
 import Input from "./common/Input";
 import PageHeader from "./common/pageHeader";
 
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import { toast } from "react-toastify";
@@ -13,7 +13,7 @@ import { useAuth } from "../context/auth.context";
 
 const SignUp = ({ redirect }) => {
   const navigate = useNavigate();
-  const { createUser } = useAuth();
+  const { user, createUser } = useAuth();
 
   const [error, setError] = useState("");
 
@@ -48,6 +48,10 @@ const SignUp = ({ redirect }) => {
       }
     },
   });
+
+  if (user) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <>
