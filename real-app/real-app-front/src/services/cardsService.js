@@ -16,11 +16,16 @@ export function editCard(id, card) {
   return httpService.put(`/cards/${id}`, card);
 }
 
+export function getById(id) {
+  return httpService.get(`/cards/${id}`);
+}
+
 const cardsService = {
   createCard,
   getAll,
   deleteCard,
   editCard,
+  getById,
 };
 
 export default cardsService;

@@ -5,7 +5,7 @@ const ProtectedRoute = ({ children, bizOnly = false }) => {
   const { user } = useAuth();
 
   if (!user || (bizOnly && !user.biz)) {
-    return <Navigate to="/signin" />;
+    return <Navigate to="/signin"  />;
   }
 
   return children;

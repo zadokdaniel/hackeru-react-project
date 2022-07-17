@@ -1,3 +1,4 @@
+import EditCard from "./components/editCard";
 import Footer from "./components/footer";
 
 import "./App.css";
@@ -15,6 +16,7 @@ import SignUpBiz from "./components/signupBiz";
 import MyCards from "./components/myCards";
 import CreateCard from "./components/createCard";
 import ProtectedRoute from "./components/common/protectedRoute";
+import DeleteCard from "./components/deleteCard";
 
 function App() {
   return (
@@ -28,7 +30,23 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="about" element={<About />} />
           <Route
-            path="create-card"
+            path="my-cards/delete/:id"
+            element={
+              <ProtectedRoute bizOnly>
+                <DeleteCard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="my-cards/edit/:id"
+            element={
+              <ProtectedRoute bizOnly>
+                <EditCard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="my-cards/create-card"
             element={
               <ProtectedRoute bizOnly>
                 <CreateCard />
@@ -45,7 +63,7 @@ function App() {
           />
           <Route
             path="signubiz"
-            element={<SignUpBiz redirect="/create-card" />}
+            element={<SignUpBiz redirect="/my-cards/create-card" />}
           />
           <Route path="signup" element={<SignUp redirect="/signin" />} />
           <Route path="signin" element={<SignIn redirect="/" />} />
